@@ -38,6 +38,7 @@ const actions = {
       ref: ref
     })
     .then(res => {
+      console.log(res)
       if(res.data.error){
         commit('SET_ERROR', res.data.message)
       }else{
@@ -48,6 +49,7 @@ const actions = {
         })
       }
     })
+    .catch(err=>console.log(err.response))
   },
   reauthenticate ({ commit }) {
     if(user_storage){

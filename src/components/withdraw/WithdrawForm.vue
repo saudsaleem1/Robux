@@ -25,24 +25,45 @@
     </div>
     <div v-else>
       <b-field label="Enter Points">
-        <b-input placeholder="Points" required min="1" type="number"></b-input>
+        <b-input placeholder="Points" required min="1" type="number" v-model="groupPoints"></b-input>
       </b-field>
 
-      <b-button expanded type="is-danger">
-        Continue
+      <b-button expanded type="is-danger"  @click="cardModal" >
+        Continue 
       </b-button>
     </div>
   </div>
 </template>
 
 <script>
+import GroupWithdrawModal1 from "@/components/withdraw/GroupWithdrawModal1";
 export default {
+components: {
+   
+  },
   data() {
     return {
+      groupPoints:1,
       isGroupAvailable: true,
       isAbleToWithdraw: true,
       isInGroup: true
     }
+  },
+  methods:{
+     //open GroupWithdrawModal1
+    cardModal() {
+      this.$buefy.modal.open({
+        parent: this,
+        component: GroupWithdrawModal1,
+        hasModalCard: true,
+        customClass: "custom-class custom-class-2",
+        trapFocus: true,
+        props:{
+          amount:this.groupPoints
+        }
+      });
+
+    },
   }
 }
 </script>

@@ -20,11 +20,11 @@
 
 <script>
 import { ToastProgrammatic as Toast } from 'buefy'
-
+import { EventBus } from '@/main.js';
 export default {
   data() {
     return {
-      affiliationLink: 'https://mybux.com/r/128ffdef'
+      affiliationLink: ''
     }
   },
   methods: {
@@ -38,6 +38,12 @@ export default {
         })
       })
     }
+  },
+  created()
+  {
+    EventBus.$on('affiliationLink',link=>{
+      this.affiliationLink = link
+    })
   }
 }
 </script>

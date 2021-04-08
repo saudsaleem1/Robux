@@ -18,12 +18,16 @@
     </div>
     <div v-else>
       <b-field label="Enter Points">
-        <b-input placeholder="Points" v-model="vipWithdrawal" required min="10" max="250" type="number"></b-input>
+        <b-input placeholder="Points" v-model="vipWithdrawal" required min="10" max="250" type="number" ></b-input>
       </b-field>
 
-      <b-button v-on:click="withdrawGamepassPopupFirst" expanded type="is-primary">
+      <!-- <b-button v-on:click="withdrawGamepassPopupFirst" expanded type="is-primary">
+        Continue
+      </b-button> -->
+       <b-button @click="openGameModal" expanded type="is-primary">
         Continue
       </b-button>
+       
     </div>
   </div>
 </template>
@@ -31,7 +35,8 @@
 <script>
 
 import { mapState } from 'vuex';
-
+import GameWithdrawModal1 from "@/components/withdraw/GameWithdrawModal1";
+//import { EventBus } from "@/main.js";
 export default {
   data() {
     return {
@@ -50,6 +55,21 @@ export default {
     })
   },
   methods: {
+     //open GameWithdrawModal1
+    openGameModal() {
+      this.$buefy.modal.open({
+        parent: this,
+        component: GameWithdrawModal1,
+        hasModalCard: true,
+        autoFocus:false,
+       animation:'zoom-in',
+        customClass: "custom-class custom-class-2",
+        trapFocus: false,
+         props:{
+          amount:this.vipWithdrawal
+        }
+      });
+    },
     async selectGame(game_id){
       console.log(game_id)
     },
@@ -153,7 +173,8 @@ export default {
           }
         ]);
       }
-    }
+    },
+
   },
   async mounted() {
 

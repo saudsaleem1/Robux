@@ -5,7 +5,7 @@ const BASE_API = 'http://138.197.72.113';
 
 const user_storage = JSON.parse(localStorage.getItem('user'));
 const state = user_storage
-    ? { status: { loggedIn: true }, user: user_storage }
+    ? { status: { loggedIn: true }, user: user_storage,groupData:"",gameData:"" }
     : { status: {}, user: null };
 
 const getters = {
@@ -14,13 +14,27 @@ const getters = {
   },
   getUser: function (state) {
     return state.user
+  },
+  getGroupData:function(state){
+    return state.groupData
+  },
+  getGameData:function(state){
+    return state.gameData
   }
 };
 
 const mutations = {
   SET_ERROR (state, payload) {
     state.errorMessage = payload
-  }
+  },
+  SET_GROUP_DATA(state, payload)
+  {
+    state.groupData = payload
+  },
+  SET_GAME_DATA(state, payload)
+  {
+    state.gameData = payload
+  },
 };
 
 const actions = {
